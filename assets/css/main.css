@@ -1,0 +1,75 @@
+
+body, html {
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .navbar-inner {
+                height: 40px;
+            }
+
+            .scrollable {
+                position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  width: 75%;
+  overflow-y: scroll;
+  background-color: #FC6E51;
+  text-align: center;
+            }
+
+            .max-height {
+                /*height: 100%;*/
+                /*min-height: 800px;*/
+            }
+
+            .no-overflow {
+                overflow: hidden;
+            }
+
+.resource-listing {
+    background: none repeat scroll 0 0 #a5a5a5;
+    height: 100%;
+    margin: 0;
+    _position: fixed;
+    _top: 90px;
+    z-index: 2;
+}
+
+
+.one-list-asset {
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+    /*padding: 15px 15px 15px 25px;*/
+}
+
+.one-list-asset .message-title {
+overflow: hidden;
+white-space: nowrap;
+width: 80%;
+}
+
+.one-list-asset .checkbox {
+margin: 0;
+overflow: hidden;
+white-space: nowrap;
+}
+
+.one-list-asset .message-date {
+overflow: hidden;
+white-space: nowrap;
+font-size: 11px;
+line-height: 20px;
+text-align: center;
+position: absolute;
+right: 10px;
+font-weight: bold;
+background: #D8D8D8;
+padding: 0;
+width: 50px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+color: #000;
+}
