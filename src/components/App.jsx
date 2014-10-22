@@ -12,6 +12,9 @@ var Link = Router.Link;
 
 var DefaultLayout = require('../layouts/DefaultLayout.jsx');
 
+var GlobalActions = require('../actions/GlobalActions.jsx');
+
+
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -28,6 +31,14 @@ var App = React.createClass({
   componentWillMount: function() {
     auth.onChange = this.setStateOnAuth;
     auth.login();
+    this.interval = setInterval(this.tick, 5000);
+  },
+  componentWillUnmount: function() {
+    clearInterval(this.interval);
+  },
+  tick: function() {
+    console.log('ticking...');
+    GlobalActions.tick(this);
   },
 
   render: function() {

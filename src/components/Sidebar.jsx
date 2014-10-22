@@ -33,6 +33,7 @@ var SideBar = React.createClass({
           <li>
             <Entry to="dashboard" name="Dashboard" icon="dashboard"/>
             <Entry to="assets" name="Assets" icon="file-image-o"/>
+            <Entry to="tasks" name="Tasks" icon="file-image-o"/>
           </li>
         </ul>
       </div>

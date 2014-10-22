@@ -4,36 +4,61 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var Router = require('react-router');
 var Link = Router.Link;
+
+var Badge = React.createClass({
+  render: function() {
+    var className = 'fa fa-'+this.props.icon;
+    return (
+    <li className="hidden-xs">
+      <Link to={this.props.to}>
+        <i className={className}></i>
+        <span className="badge">{this.props.count}</span>
+      </Link>
+    </li>);
+  }
+});
+
+var NotificationStore = require('../stores/NotificationStore.jsx');
+
+var storeStateFunctionMixin = function (listenable,key,func) {
+  return {
+    getInitialState: function() {
+      var state = {};
+      state[key] = listenable[func]();
+      return state;
+    },
+    componentDidMount: function(){
+      for(var m in Reflux.ListenerMethods){
+        if (this[m] !== Reflux.ListenerMethods[m]){
+          if (this[m]){
+            throw "Can't have other property '"+m+"' when using Reflux.listenTo!";
+          }
+          this[m] = Reflux.ListenerMethods[m];
+        }
+      }
+      var me = this, cb = function(){ var state = {}; state[key] = listenable[func](); me.setState(state);};
+      this.listenTo(listenable,cb,cb);
+    },
+    componentWillUnmount: Reflux.ListenerMixin.componentWillUnmount
+  };
+};
+
+var NotificationBadge = React.createClass({
+  //mixins: [Reflux.listenTo(NotificationStore, 'update')],
+  mixins: [storeStateFunctionMixin(NotificationStore, 'count', 'getUnreadNotifications')],
+
+  render: function() {
+    return (<Badge to="assets" icon="bell" count={this.state.count} />);
+  },
+});
 
 var TopBar = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <div id="screensaver">
-	<canvas id="canvas"></canvas>
-	<i className="fa fa-lock" id="screen_unlock"></i>
-</div>
-<div id="modalbox">
-	<div className="devoops-modal">
-		<div className="devoops-modal-header">
-			<div className="modal-header-name">
-				<span>Basic table</span>
-			</div>
-			<div className="box-icons">
-				<a className="close-link">
-					<i className="fa fa-times"></i>
-				</a>
-			</div>
-		</div>
-		<div className="devoops-modal-inner">
-		</div>
-		<div className="devoops-modal-bottom">
-		</div>
-	</div>
-</div>
 <header className="navbar">
 	<div className="container-fluid expanded-panel">
 		<div className="row">
@@ -53,12 +78,7 @@ var TopBar = React.createClass({
 					</div>
 					<div className="col-xs-4 col-sm-8 top-panel-right">
 						<ul className="nav navbar-nav pull-right panel-menu">
-							<li className="hidden-xs">
-								<a href="ajax/loader.php?page=notifications" className="ajax-link">
-									<i className="fa fa-bell"></i>
-									<span className="badge">0</span>
-								</a>
-							</li>
+							<NotificationBadge />
 							<li className="hidden-xs">
 								<a className="ajax-link" href="ajax/calendar.html">
 									<i className="fa fa-calendar"></i>
@@ -110,7 +130,6 @@ var TopBar = React.createClass({
 		</div>
 	</div>
 </header>
-      </div>
     );
   }
 

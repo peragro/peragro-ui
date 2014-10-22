@@ -6,8 +6,8 @@
 var Reflux = require('reflux');
 
 
-var API = 'http://damn.csproject.org:8081/assets';
-var _assets = {};
+var API = 'http://localhost:8000/referencetasks';
+var _tasks = {};
 var _changeListeners = [];
 var _initCalled = false;
 
@@ -26,7 +26,7 @@ function getJSON(url, cb) {
   req.send();
 }
 
-var AssetStore = module.exports = Reflux.createStore({
+var ReferenceTaskStore = module.exports = Reflux.createStore({
 
   init: function () {
     if (_initCalled) {
@@ -36,20 +36,20 @@ var AssetStore = module.exports = Reflux.createStore({
     _initCalled = true;
 
     getJSON(API, function (err, res) {
-      res.results.forEach(function (asset) {
-        _assets[asset.id] = asset;
+      res.results.forEach(function (task) {
+        _tasks[task.id] = task;
       });
 
-      AssetStore.trigger(AssetStore.getAssets());
+      ReferenceTaskStore.trigger(ReferenceTaskStore.getAll());
     });
   },
 
-  getAssets: function () {
+  getAll: function () {
     var array = [];
 
-    for (var id in _assets) {
+    for (var id in _tasks) {
       if (true) {
-        array.push(_assets[id]);
+        array.push(_tasks[id]);
       }
     }
     console.log(array);
@@ -57,7 +57,7 @@ var AssetStore = module.exports = Reflux.createStore({
     return array;
   },
 
-  getAsset: function (id) {
-    return _assets[id];
+  get: function (id) {
+    return _tasks[id];
   }
 });

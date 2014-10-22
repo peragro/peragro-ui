@@ -8,34 +8,30 @@ var Reflux = require('reflux');
 var Router = require('react-router');
 var Link = Router.Link;
 
-var auth = require('../utils/authentication.jsx');
-var AuthenticatedRoute = require('../mixins/authenticated_route.jsx');
+var auth = require('../../utils/authentication.jsx');
+var AuthenticatedRoute = require('../../mixins/authenticated_route.jsx');
 
-var AssetStore = require('../stores/AssetStore.jsx');
+var ReferenceTaskStore = require('../../stores/ReferenceTaskStore.jsx');
 
-var BreadCrumb = require('./BreadCrumb.jsx');
+var BreadCrumb = require('../BreadCrumb.jsx');
 
-var Assets = React.createClass({
-  mixins: [AuthenticatedRoute, Reflux.listenTo(AssetStore, "update")],
+var ReferenceTasks = React.createClass({
+  mixins: [AuthenticatedRoute, Reflux.listenTo(ReferenceTaskStore, "update")],
 
   getInitialState: function() {
     return {
-      assets: AssetStore.getAssets(),
+      tasks: ReferenceTaskStore.getAll(),
       loading: true
     };
   },
 
-  componentDidMount: function() {
-    this.listenTo(AssetStore, this.update);
-  },
-
-  update: function (assets) {
+  update: function (tasks) {
     if (!this.isMounted()) {
       return;
     }
 
     this.setState({
-      assets: assets,
+      tasks: tasks,
       loading: false
     });
   },
@@ -43,7 +39,7 @@ var Assets = React.createClass({
   render: function() {
     var token = auth.getToken();
     //console.log(this.state.assets);
-    var assets = this.state.assets.map(function(asset, i) {
+    var assets = this.state.tasks.map(function(asset, i) {
       //return <li key={asset.id}><Link to="asset" params={asset}>{asset.subname}</Link></li>;
       return <ListAsset key={i} asset={asset} />;
     });
@@ -72,7 +68,7 @@ var ListAsset = React.createClass({
   render: function() {
     return (
       <li className="row one-list-asset" id="msg-one">
-        <Link to="asset" params={this.props.asset}>
+        <Link to="task" params={this.props.asset}>
           <div className="col-xs-1 checkbox">
             <label>
               <input type="checkbox" />
@@ -88,4 +84,4 @@ var ListAsset = React.createClass({
 
 });
 
-module.exports = Assets;
+module.exports = ReferenceTasks;
