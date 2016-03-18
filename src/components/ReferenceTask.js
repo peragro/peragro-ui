@@ -1,17 +1,13 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
+import React from 'react'
+import Reflux from 'reflux'
 
-var React = require('react');
-var Reflux = require('reflux');
+var ReferenceTaskStore = require('../stores/ReferenceTaskStore');
 
-var ReferenceTaskStore = require('../../stores/ReferenceTaskStore.jsx');
+import Tabs  from './Tabs'
+import { Column, Row, Preview, Details } from './Assets'
 
-var Tabs = require('../Tabs.jsx');
-
-var ReferenceTask = module.exports = React.createClass({
-  displayName: 'Asset',
+export default React.createClass({
+  displayName: 'ReferenceTask',
   mixins: [Reflux.listenTo(ReferenceTaskStore, 'update')],
 
   update: function () {
@@ -57,47 +53,6 @@ var ReferenceTask = module.exports = React.createClass({
           </Column>
         </Row>
       </div>
-    );
-  }
-
-});
-
-
-var Row = React.createClass({
-  render: function() {
-    return (
-      <div className="row">
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-var Column = React.createClass({
-  render: function() {
-    //col-sm-12 col-md-12 col-lg-6
-    return (
-      <div className={'col-lg-'+this.props.size}>{this.props.children}</div>
-    );
-  }
-});
-
-
-var Preview = React.createClass({
-
-  render: function() {
-    return (
-      <div><img src={this.props.url} alt="Preview" /></div>
-    );
-  }
-
-});
-
-var Details = React.createClass({
-
-  render: function() {
-    return (
-      <div>Details</div>
     );
   }
 

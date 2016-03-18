@@ -1,10 +1,4 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
-
-var Reflux = require('reflux');
-
+import Reflux from 'reflux'
 
 var API = 'http://damn.csproject.org:8081/assets';
 var _assets = {};

@@ -1,10 +1,4 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
-
-var Reflux = require('reflux');
-
+import Reflux from 'reflux'
 
 var API = 'http://localhost:8000/referencetasks';
 var _tasks = {};

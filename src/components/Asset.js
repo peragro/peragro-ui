@@ -1,16 +1,11 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
+import React from 'react'
+import Reflux from 'reflux'
 
-var React = require('react');
-var Reflux = require('reflux');
+const AssetStore = require('../stores/AssetStore');
 
-var AssetStore = require('../stores/AssetStore.jsx');
+import Tabs from './Tabs'
 
-var Tabs = require('./Tabs.jsx');
-
-var Asset = module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Asset',
   mixins: [Reflux.listenTo(AssetStore, 'update')],
 
@@ -62,7 +57,7 @@ var Asset = module.exports = React.createClass({
 });
 
 
-var Row = React.createClass({
+const Row = React.createClass({
   render: function() {
     return (
       <div className="row">
@@ -72,7 +67,7 @@ var Row = React.createClass({
   }
 });
 
-var Column = React.createClass({
+export const Column = React.createClass({
   render: function() {
     //col-sm-12 col-md-12 col-lg-6
     return (
@@ -82,7 +77,7 @@ var Column = React.createClass({
 });
 
 
-var Preview = React.createClass({
+export const Preview = React.createClass({
 
   render: function() {
     return (
@@ -92,7 +87,7 @@ var Preview = React.createClass({
 
 });
 
-var Details = React.createClass({
+export const Details = React.createClass({
 
   render: function() {
     return (
