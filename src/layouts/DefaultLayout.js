@@ -1,14 +1,8 @@
-/**
- * @jsx React.DOM
- */
+import React from 'react'
+import SideBar from '../components/SideBar'
+import TopBar from '../components/TopBar'
 
-'use strict';
-
-var React = require('react');
-var SideBar = require('../components/Sidebar.jsx');
-var TopBar = require('../components/Topbar.jsx');
-
-var DefaultLayout = React.createClass({
+export default React.createClass({
   render: function () {
     return (
       <div>
@@ -25,5 +19,3 @@ var DefaultLayout = React.createClass({
     );
   }
 });
-
-module.exports = DefaultLayout;

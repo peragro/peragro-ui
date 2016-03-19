@@ -1,13 +1,8 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
+import Reflux from 'reflux'
 
-var Reflux = require('reflux');
+import GlobalActions from '../actions/GlobalActions'
 
-var GlobalActions = require('../actions/GlobalActions.jsx');
-
-var NotificationStore = module.exports = Reflux.createStore({
+var NotificationStore = module.exports =  Reflux.createStore({
   listenables: [GlobalActions],
 
   init: function(){

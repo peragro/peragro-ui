@@ -1,14 +1,11 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
+import React from 'react'
+import Reflux from 'reflux'
+import { Link } from 'react-router'
 
-var React = require('react');
-var Reflux = require('reflux');
-var Router = require('react-router');
-var Link = Router.Link;
+var NotificationStore = require('../stores/NotificationStore.js');
+import auth from '../utils/auth'
 
-var Badge = React.createClass({
+const Badge = React.createClass({
   render: function() {
     var className = 'fa fa-'+this.props.icon;
     return (
@@ -20,8 +17,6 @@ var Badge = React.createClass({
     </li>);
   }
 });
-
-var NotificationStore = require('../stores/NotificationStore.jsx');
 
 var storeStateFunctionMixin = function (listenable,key,func) {
   return {
@@ -46,7 +41,7 @@ var storeStateFunctionMixin = function (listenable,key,func) {
   };
 };
 
-var NotificationBadge = React.createClass({
+const NotificationBadge = React.createClass({
   //mixins: [Reflux.listenTo(NotificationStore, 'update')],
   mixins: [storeStateFunctionMixin(NotificationStore, 'count', 'getUnreadNotifications')],
 
@@ -55,7 +50,7 @@ var NotificationBadge = React.createClass({
   },
 });
 
-var TopBar = React.createClass({
+export default React.createClass({
 
   render: function() {
     return (
@@ -68,7 +63,7 @@ var TopBar = React.createClass({
 			<div id="top-panel" className="col-xs-12 col-sm-10">
 				<div className="row">
 					<div className="col-xs-8 col-sm-4">
-						<a href="#" className="show-sidebar">
+						<a className="show-sidebar">
 						  <i className="fa fa-bars"></i>
 						</a>
 						<div id="search">
@@ -134,5 +129,3 @@ var TopBar = React.createClass({
   }
 
 });
-
-module.exports = TopBar;

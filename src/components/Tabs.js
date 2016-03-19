@@ -1,11 +1,6 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
+import React from 'react'
 
-var React = require('react');
-
-var Tabs = module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function() {
     return {
         tabs: [
@@ -35,7 +30,7 @@ var Tabs = module.exports = React.createClass({
 
 
 
-var TabsPane = React.createClass({
+const TabsPane = React.createClass({
   render: function() {
     var active = this.props.active;
     var items = this.props.items.map(function(item, index) {
@@ -52,7 +47,7 @@ var TabsPane = React.createClass({
   }
 });
 
-var TabsContent = React.createClass({
+const TabsContent = React.createClass({
   render: function() {
     var active = this.props.active;
     var items = this.props.items.map(function(item, index) {

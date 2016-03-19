@@ -1,15 +1,8 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
+import React from 'react'
 
-var React = require('react');
+import { Link } from 'react-router'
 
-var Router = require('react-router');
-var Link = Router.Link;
-
-
-var Entry = React.createClass({
+const Entry = React.createClass({
 
   render: function() {
     var icon = "fa fa-"+this.props.icon;
@@ -24,7 +17,7 @@ var Entry = React.createClass({
 });
 
 
-var SideBar = React.createClass({
+export default React.createClass({
 
   render: function() {
     return (
@@ -41,5 +34,3 @@ var SideBar = React.createClass({
   }
 
 });
-
-module.exports = SideBar;
